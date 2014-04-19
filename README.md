@@ -26,31 +26,26 @@ Options
 - **arrows**  ```boolean```
 
 Whether or not to show the navigation arrows (previous and next).
-
 Default: *true*
 
 - **duration** ```number```
 
 Number of miliseconds for the flip transition to take. 
-
 Default: *500*
 
 - **itemsperpage**  ```integer```
 
 The number of cards to show at once. Can be any number that goes well with your total number of items.
-
 Default: *3*
 
 - **loader** ```boolean```
 
 Whether or not to show the css spinning loader when images are being loaded. 
-
 Default: *true*
 
 - **randomizer** ```number```
 
 For that slightly more staggered look. Deviates from the set flip duration by the magnitude specified. For best results, use a decimal between 0 and 1. When set to 1, the duration will be deviated by -0.5x and +1.5x, and randomly applied to the set of cards on each flip. A delay between 0 and the flip duration will also be randomly applied across the set.
-
 Default: *0*
 
 
