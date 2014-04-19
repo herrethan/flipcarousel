@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Flip Carousel</title>
+<script src="jquery-1.10.2.min.js"></script>
+<script src="flip-carousel.js"></script>
+<link href="foundation-icons.css" rel="stylesheet">
+<link href="flip-carousel.css" rel="stylesheet">
+</head>
+
+<body>
+
+<article title="item1"><h1>Item 1</h1><span>$123</span><div class="fi-graph-pie"></div></article>
+<article title="item2"><h1>Item 2</h1><span>$980</span><div class="fi-asl"></div></article>
+<article title="item3"><h1>Item 3</h1><span>$67</span><div class="fi-asterisk"></div></article>
+<article title="item4"><h1>Item 4</h1><span>$13</span><div class="fi-blind"></div></article>
+<article title="item5"><h1>Item 5</h1><span>$134</span><div class="fi-burst-new"></div></article>
+<article title="item6"><h1>Item 6</h1><span>$456</span><div class="fi-calendar"></div></article>
+<article title="item7"><h1>Item 7</h1><span>$99</span><div class="fi-comment-quotes"></div></article>
+<article title="item8"><h1>Item 8</h1><span>$92</span><div class="fi-die-five"></div></article>
+<article title="item9"><h1>Item 9</h1><span>$3</span><div class="fi-dislike"></div></article>
+<article title="item10"><h1>Item 10</h1><span>$12</span><div class="fi-foot"></div></article>
+<article title="item11"><h1>Item 11</h1><span>(last)</span><div class="fi-trophy"></div></article>
+
+<script>
+	$('article').flipcarousel({
+		pagination : false,
+		loader : true,
+		itemsperpage: 3,
+		randomizer: 0.7
+	});
+</script>
+		
+</body>
+</html>	
