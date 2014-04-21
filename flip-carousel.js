@@ -37,7 +37,8 @@ $.fn.flipcarousel = function(options) {
         deg = 0, //track degree of flip
         disabled = true, //flag to prevent clicks while loading
 
-        pages = []; //master page/cell tracker
+        //master page/cell tracker
+        pages = []; 
         for(p=0; p < Math.ceil($cells.length/ops.itemsperpage); p++){
             var start = ops.itemsperpage*p
             pages[p] = $cells.slice(start, start + ops.itemsperpage )
@@ -105,15 +106,17 @@ $.fn.flipcarousel = function(options) {
 
     function place(cells, face){ //place content into div.face (into either .front or .back) 
         for(c=0; c < ops.itemsperpage; c++){
-            var cell = cells[c] || '';
-            $card.eq(c).find(face).html(cell)
+            var cell = cells[c] || '<div class="empty"></div>';
+            $card.eq(c).find(face).html( $(cell).clone() );
         };
     }
 
     function go(to){ //what page we are going to
-        
         arrows(to);
         face = face == '.front' ? '.back' : '.front';
+        $('.back, .front').css({'z-index': 0})
+        $card.find(face).css({'z-index':1})
+
         place(pages[to], face);
 
         if(to > i) deg += 180;
