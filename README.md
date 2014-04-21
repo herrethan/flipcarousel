@@ -28,7 +28,7 @@ Whether or not to show the navigation arrows (previous and next).
 Default: *true*
 
 - **duration** ```number```
-Number of miliseconds for the flip transition to take. 
+Number of milliseconds for the flip transition to take. 
 Default: *500*
 
 - **itemsperpage**  ```integer```
