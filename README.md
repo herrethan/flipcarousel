@@ -3,6 +3,8 @@ jQuery Flip Carousel
 
 Flip Carousel is an alternative to an image/content carousel. Instead of sliding or cross-fading content, it flips like a deck of cards. It will continually append content behind the scenes with respect to the direction you are flipping. It uses lots of cool CSS3 transitions and animations, and *no* JS animation.
 
+Requires jQuery 1.8.1 or above, HTML5 Shiv for IE < 10 support.
+
 [See a demo here](http://herrmedia.com/projects/flip/)
 
 Features
