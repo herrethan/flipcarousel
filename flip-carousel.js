@@ -139,13 +139,13 @@ $.fn.flipcarousel = function(options) {
         if(i == pages.length-1) $arrowright.addClass('hide');
     }
 
-    function flip(d, flipdone){ //visual flippancy
+    function flip(d, flipdone){ //visual flippancy, updated to avoid IE
         if(ops.randomizer) randomizer();
         $card.css({ 
             '-webkit-transform':'rotateY('+ d +'deg)', 
-            '-moz-transform':'rotateY('+ d +'deg)',
-            '-ms-transform':'rotateY('+ d +'deg)',
-            'transform':'rotateY('+ d +'deg)'
+            '-moz-transform':'rotateY('+ d +'deg)'//,
+            //'-ms-transform':'rotateY('+ d +'deg)',
+            //'transform':'rotateY('+ d +'deg)'
         });
         if(flipdone) setTimeout(flipdone, ops.duration);
 

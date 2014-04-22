@@ -32,8 +32,8 @@
 	position:relative;
 	-webkit-transform: rotateY(90deg);
 	-moz-transform: rotateY(90deg);
-	-ms-transform: rotateY(90deg);
-	transform: rotateY(90deg);
+	/*-ms-transform: rotateY(90deg);
+	transform: rotateY(90deg);*/
 	-webkit-transform-style: preserve-3d;
 	-webkit-transition: 0.5s;
 	-moz-transform-style: preserve-3d;
@@ -61,8 +61,8 @@
 .flip-carousel .back{
 	-webkit-transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
-	-ms-transform: rotateY(180deg);
-	transform: rotateY(180deg);
+	/*-ms-transform: rotateY(180deg);
+	transform: rotateY(180deg);*/
 }
 
 .ie .flip-carousel .face .empty{
