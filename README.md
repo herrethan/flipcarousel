@@ -1,7 +1,9 @@
 jQuery Flip Carousel
 ====================
 
-Flip Carousel is an alternative to an image/content carousel. Instead of sliding or cross-fading content, it flips like a deck of cards. It will continually append content behind the scenes with respect to the direction you are flipping. It uses lots of cool CSS3 transitions and animations, and *no* JS animation.
+Flip Carousel is an alternative to an image/content carousel. Instead of sliding or cross-fading content, it flips like a set of cards on a table. It will continually append content behind the scenes with respect to the direction you are flipping. It uses lots of cool CSS3 transitions and animations, and *no* JS animation.
+
+Works best in Chrome/Safari, second best in Firefox, and worst, as expected, in IE.
 
 Requires:
 - jQuery 1.8.1 or above
@@ -13,7 +15,7 @@ Features
 --------
 - Includes a check for inline images and will always preload one page ahead to ensure smooth flipping
 - Randomizer for more organic looking flipping
-- Graceful degradation for IE8/9 and JS disabled
+- Graceful degradation for IE8-10 and JS disabled
 
 
 Usage
