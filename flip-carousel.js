@@ -39,8 +39,8 @@ $.fn.flipcarousel = function(options) {
 
         //master page/cell tracker
         pages = []; 
-        for(p=0; p < Math.ceil($cells.length/ops.itemsperpage); p++){
-            var start = ops.itemsperpage*p
+        for(var p=0; p < Math.ceil($cells.length/ops.itemsperpage); p++){
+            var start = ops.itemsperpage*p;
             pages[p] = $cells.slice(start, start + ops.itemsperpage )
         };
 
@@ -60,17 +60,17 @@ $.fn.flipcarousel = function(options) {
         $card.append($faces);
         $li.append($card);
 
-        for(c=0; c<ops.itemsperpage; c++){
-            $ul.append($li.clone())
+        for(var c=0; c<ops.itemsperpage; c++){
+            $ul.append($li.clone());
         };
 
-        $arrowright.click(function(){ if(!disabled) go(i+1) });
-        $arrowleft.click(function(){ if(!disabled) go(i-1) });
+        $arrowright.click(function(){ if(!disabled) go(i+1); })
+        $arrowleft.click(function(){ if(!disabled) go(i-1); })
 
         $controls.append($arrowleft).append($arrowright);
         $container.append($controls).append($loader);
         $container.insertBefore($origs[0]);
-        $card = $('.card');
+        $card = $container.parent().find('.card');
         $origs.remove();
 
     }
@@ -84,8 +84,8 @@ $.fn.flipcarousel = function(options) {
         cells.find('img').each(function(index){
             imgs.push('yah!');
             img = new Image();
-            img.onload = function(){ proceed(null); };
-            img.onerror = function(){ proceed($(this)); };
+            img.onload = function(){ proceed(null); }
+            img.onerror = function(){ proceed($(this)); }
             img.src = $(this).attr('src');
         });
 
@@ -114,8 +114,8 @@ $.fn.flipcarousel = function(options) {
     function go(to){ //what page we are going to
         arrows(to);
         face = face == '.front' ? '.back' : '.front';
-        $('.back, .front').css({'z-index': 0})
-        $card.find(face).css({'z-index':1})
+        $('.back, .front').css({'z-index': 0});
+        $card.find(face).css({'z-index':1});
 
         place(pages[to], face);
 
@@ -160,7 +160,7 @@ $.fn.flipcarousel = function(options) {
         var delays = []; //delay animation between 0ms - ops.duration
         var durations = []; //deviate -0.5 and +1.5 away from ops.duration when ops.randomizer = 1
 
-        for(a=1; a <= ops.itemsperpage; a++){
+        for(var a=1; a <= ops.itemsperpage; a++){
             var num =  a/ops.itemsperpage % 2;
             num = Math.floor(num * ops.randomizer * ops.duration/2);
             delays.push(num);
@@ -203,7 +203,9 @@ $.fn.flipcarousel = function(options) {
     }
 
     init();
-
+    
+    this.goTo = go;
+    this.pages = pages;
+    this.pageCount = pages.length;
     return this;
-
 }
