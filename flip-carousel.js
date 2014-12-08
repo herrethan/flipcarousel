@@ -70,7 +70,7 @@ $.fn.flipcarousel = function(options) {
         $controls.append($arrowleft).append($arrowright);
         $container.append($controls).append($loader);
         $container.insertBefore($origs[0]);
-        $card = $('.card');
+        $card = $container.parent().find('.card');
         $origs.remove();
 
     }
