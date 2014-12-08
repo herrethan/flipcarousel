@@ -203,7 +203,9 @@ $.fn.flipcarousel = function(options) {
     }
 
     init();
-
+    
+    this.goTo = go;
+    this.pages = pages;
+    this.pageCount = pages.length
     return this;
-
 }
