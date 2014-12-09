@@ -66,20 +66,8 @@ $.fn.flipcarousel = function(options) {
             $ul.append($li.clone());
         };
 
-        $arrowright.click(function(){ 
-            if(!disabled) {
-                go(i+1); 
-                $dots_container.find('.dot').removeClass('active');
-                $dots_container.find('.dot').filter(function() {return ($(this).data('flipid') == (i+1))}).addClass('active');
-            }
-        });
-        $arrowleft.click(function(){
-            if(!disabled){
-                go(i-1);
-                $dots_container.find('.dot').removeClass('active');
-                $dots_container.find('.dot').filter(function() {return ($(this).data('flipid') == (i-1))}).addClass('active');
-            }
-        });
+        $arrowright.click(function(){if(!disabled) go(i+1); });
+        $arrowleft.click(function(){if(!disabled) go(i-1); });
 
         $controls.append($arrowleft).append($arrowright);
         $container.append($controls).append($loader);
@@ -144,6 +132,8 @@ $.fn.flipcarousel = function(options) {
     }
 
     function go(to){ //what page we are going to
+    	$dots_container.find('.dot').removeClass('active');
+    	$dots_container.find('.dot').filter(function() {return ($(this).data('flipid') == to)}).addClass('active');
         arrows(to);
         face = face == '.front' ? '.back' : '.front';
         $('.back, .front').css({'z-index': 0});
