@@ -49,6 +49,10 @@ Default: *true*
 For that slightly more staggered look. Deviates from the set flip duration by the magnitude specified. For best results, use a decimal between 0 and 1. When set to 1, the duration will be deviated by -0.5x and +1.5x, and randomly applied to the set of cards on each flip. A delay between 0 and the flip duration will also be randomly applied across the set.
 Default: *0*
 
+- **pagination** ```boolean```
+Whether or not to show pagination dots.
+Default: *false*
+
 
 Events
 ------
@@ -78,7 +82,7 @@ Ideas for the Future
 ----------
 - Add touch events for mobile for thumb-swipability
 - Add ability to click on a card and "zoom-in" to the content
-- Add pagination dots, ability to jump to any page
+- ~~Add pagination dots, ability to jump to any page~~
 
 
 
