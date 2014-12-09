@@ -83,10 +83,7 @@ $.fn.flipcarousel = function(options) {
 	    }
 	    $dots_container.find('.dot').click(function(){
                 if(!disabled){
-                    $dots_container.find('.dot').removeClass('active');
-                    var $this = $(this);
-                    $this.addClass('active');
-                    go($this.data('flipid'));
+                    go($(this).data('flipid'));
                 }
             })
 	    $container.append($dots_container);
