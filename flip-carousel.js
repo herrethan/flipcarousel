@@ -15,9 +15,9 @@ $.fn.flipcarousel = function(options) {
         duration : 500, //flip css transition-duration property in ms
         randomizer : 0, //give randomness to card flip delay and duration (0 - 1)
         loader : false, //show loader when loading content
-        arrows : true //arrows for previous/next navigation
+        arrows : true, //arrows for previous/next navigation
         //accrual : 1 //number of pages to preload (forthcoming)
-        //pagination : false //specific page navigation (forthcoming)
+        pagination : false
       }, options);
 
         //structural elements
@@ -25,6 +25,8 @@ $.fn.flipcarousel = function(options) {
         $card = $('<div class="card">'),
         $faces = $('<div class="face front"></div><div class="face back"></div>'),
         $controls = $('<div class="controls">'),
+        $dots_container = $('<div class="controls dots">'),
+        $span = $('<span class="dot"></span>'),
         $arrowright = $('<div class="arrow right">'),
         $arrowleft = $('<div class="arrow left hide">'),
         $loader = $('<div class="loader hide">'),
@@ -64,15 +66,45 @@ $.fn.flipcarousel = function(options) {
             $ul.append($li.clone());
         };
 
-        $arrowright.click(function(){ if(!disabled) go(i+1); })
-        $arrowleft.click(function(){ if(!disabled) go(i-1); })
+        $arrowright.click(function(){ 
+            if(!disabled) {
+                go(i+1); 
+                $dots_container.find('.dot').removeClass('active');
+                $dots_container.find('.dot').filter(function() {return ($(this).data('flipid') == (i+1))}).addClass('active');
+            }
+        });
+        $arrowleft.click(function(){
+            if(!disabled){
+                go(i-1);
+                $dots_container.find('.dot').removeClass('active');
+                $dots_container.find('.dot').filter(function() {return ($(this).data('flipid') == (i-1))}).addClass('active');
+            }
+        });
 
         $controls.append($arrowleft).append($arrowright);
         $container.append($controls).append($loader);
         $container.insertBefore($origs[0]);
         $card = $container.parent().find('.card');
+        
+        if(ops.pagination){
+	    for(var dot = 0;dot < pages.length;dot++){
+	        if(dot != 0)
+	            $dots_container.append($span.clone().data('flipid',dot));
+	        else
+	            $dots_container.append($span.clone().addClass('active').data('flipid',dot));
+	    }
+	    $dots_container.find('.dot').click(function(){
+                if(!disabled){
+                    $dots_container.find('.dot').removeClass('active');
+                    var $this = $(this);
+                    $this.addClass('active');
+                    go($this.data('flipid'));
+                }
+            })
+	    $container.append($dots_container);
+        }
+        
         $origs.remove();
-
     }
 
     function load(cells, callback){ //load cell content, check for images
