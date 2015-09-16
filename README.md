@@ -53,6 +53,10 @@ Default: *0*
 Whether or not to show pagination dots.
 Default: *false*
 
+- **vertical** ```boolean```
+Whether or not to flip the items vertical.
+Default: *false*
+
 
 Events
 ------
