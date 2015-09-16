@@ -16,6 +16,7 @@ $.fn.flipcarousel = function(options) {
         randomizer : 0, //give randomness to card flip delay and duration (0 - 1)
         loader : false, //show loader when loading content
         arrows : true, //arrows for previous/next navigation
+        vertical: false, //switch to vertical flip
         //accrual : 1 //number of pages to preload (forthcoming)
         pagination : false
       }, options);
@@ -57,6 +58,10 @@ $.fn.flipcarousel = function(options) {
             '-ms-transition-duration': ops.duration + 'ms',
             'transition-duration': ops.duration + 'ms'
         });
+        
+        if(ops.vertical === true){
+        	$container.addClass('flip-carousel-vertical');
+        }
 
         $container.append($ul);
         $card.append($faces);
@@ -160,12 +165,21 @@ $.fn.flipcarousel = function(options) {
 
     function flip(d, flipdone){ //visual flippancy, updated to avoid IE
         if(ops.randomizer) randomizer();
-        $card.css({ 
-            '-webkit-transform':'rotateY('+ d +'deg)', 
-            '-moz-transform':'rotateY('+ d +'deg)'//,
-            //'-ms-transform':'rotateY('+ d +'deg)',
-            //'transform':'rotateY('+ d +'deg)'
-        });
+        if(ops.vertical === false){
+	        $card.css({ 
+    	        '-webkit-transform':'rotateY('+ d +'deg)', 
+        	    '-moz-transform':'rotateY('+ d +'deg)'//,
+            	//'-ms-transform':'rotateY('+ d +'deg)',
+	            //'transform':'rotateY('+ d +'deg)'
+    	    });
+    	} else {
+    		$card.css({ 
+    	        '-webkit-transform':'rotateX('+ d +'deg)', 
+        	    '-moz-transform':'rotateX('+ d +'deg)'//,
+            	//'-ms-transform':'rotateX('+ d +'deg)',
+	            //'transform':'rotateX('+ d +'deg)'
+    	    });
+    	}
         if(flipdone) setTimeout(flipdone, ops.duration);
 
     }
