@@ -16,8 +16,10 @@ $.fn.flipcarousel = function(options) {
         randomizer : 0, //give randomness to card flip delay and duration (0 - 1)
         loader : false, //show loader when loading content
         arrows : true, //arrows for previous/next navigation
+        autoplayspeed:3000,
         //accrual : 1 //number of pages to preload (forthcoming)
-        pagination : false
+        //pagination : false //specific page navigation (forthcoming)
+        autoplay:false
       }, options);
 
         //structural elements
@@ -25,8 +27,6 @@ $.fn.flipcarousel = function(options) {
         $card = $('<div class="card">'),
         $faces = $('<div class="face front"></div><div class="face back"></div>'),
         $controls = $('<div class="controls">'),
-        $dots_container = $('<div class="controls dots">'),
-        $span = $('<span class="dot"></span>'),
         $arrowright = $('<div class="arrow right">'),
         $arrowleft = $('<div class="arrow left hide">'),
         $loader = $('<div class="loader hide">'),
@@ -41,8 +41,8 @@ $.fn.flipcarousel = function(options) {
 
         //master page/cell tracker
         pages = []; 
-        for(var p=0; p < Math.ceil($cells.length/ops.itemsperpage); p++){
-            var start = ops.itemsperpage*p;
+        for(p=0; p < Math.ceil($cells.length/ops.itemsperpage); p++){
+            var start = ops.itemsperpage*p
             pages[p] = $cells.slice(start, start + ops.itemsperpage )
         };
 
@@ -62,34 +62,19 @@ $.fn.flipcarousel = function(options) {
         $card.append($faces);
         $li.append($card);
 
-        for(var c=0; c<ops.itemsperpage; c++){
-            $ul.append($li.clone());
+        for(c=0; c<ops.itemsperpage; c++){
+            $ul.append($li.clone())
         };
 
-        $arrowright.click(function(){if(!disabled) go(i+1); });
-        $arrowleft.click(function(){if(!disabled) go(i-1); });
+        $arrowright.click(function(){ if(!disabled) go(i+1) });
+        $arrowleft.click(function(){ if(!disabled) go(i-1) });
 
         $controls.append($arrowleft).append($arrowright);
         $container.append($controls).append($loader);
         $container.insertBefore($origs[0]);
-        $card = $container.parent().find('.card');
-        
-        if(ops.pagination){
-	    for(var dot = 0;dot < pages.length;dot++){
-	        if(dot != 0)
-	            $dots_container.append($span.clone().data('flipid',dot));
-	        else
-	            $dots_container.append($span.clone().addClass('active').data('flipid',dot));
-	    }
-	    $dots_container.find('.dot').click(function(){
-                if(!disabled){
-                    go($(this).data('flipid'));
-                }
-            })
-	    $container.append($dots_container);
-        }
-        
+        $card = $('.card');
         $origs.remove();
+
     }
 
     function load(cells, callback){ //load cell content, check for images
@@ -101,8 +86,8 @@ $.fn.flipcarousel = function(options) {
         cells.find('img').each(function(index){
             imgs.push('yah!');
             img = new Image();
-            img.onload = function(){ proceed(null); }
-            img.onerror = function(){ proceed($(this)); }
+            img.onload = function(){ proceed(null); };
+            img.onerror = function(){ proceed($(this)); };
             img.src = $(this).attr('src');
         });
 
@@ -129,12 +114,10 @@ $.fn.flipcarousel = function(options) {
     }
 
     function go(to){ //what page we are going to
-    	$dots_container.find('.dot').removeClass('active');
-    	$dots_container.find('.dot').filter(function() {return ($(this).data('flipid') == to)}).addClass('active');
         arrows(to);
         face = face == '.front' ? '.back' : '.front';
-        $('.back, .front').css({'z-index': 0});
-        $card.find(face).css({'z-index':1});
+        $('.back, .front').css({'z-index': 0})
+        $card.find(face).css({'z-index':1})
 
         place(pages[to], face);
 
@@ -179,7 +162,7 @@ $.fn.flipcarousel = function(options) {
         var delays = []; //delay animation between 0ms - ops.duration
         var durations = []; //deviate -0.5 and +1.5 away from ops.duration when ops.randomizer = 1
 
-        for(var a=1; a <= ops.itemsperpage; a++){
+        for(a=1; a <= ops.itemsperpage; a++){
             var num =  a/ops.itemsperpage % 2;
             num = Math.floor(num * ops.randomizer * ops.duration/2);
             delays.push(num);
@@ -208,6 +191,15 @@ $.fn.flipcarousel = function(options) {
         });
     }
 
+    function autoplay() {
+        setInterval(function(){
+            if(i<pages.length-1)
+                go(i+1)
+            else
+                go(0)
+        },ops.autoplayspeed)
+    }
+
     function init(){ //initializor!
         build();
         var toload = pages[1]? $.merge(pages[0], pages[1]) : pages[0] 
@@ -219,12 +211,14 @@ $.fn.flipcarousel = function(options) {
                 arrows(0);
                 flip(0);
         });
+
+        if (ops.autoplay){
+            autoplay();
+        }
     }
 
     init();
-    
-    this.goTo = go;
-    this.pages = pages;
-    this.pageCount = pages.length;
+
     return this;
+
 }
