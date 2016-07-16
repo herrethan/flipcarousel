@@ -35,6 +35,7 @@ $.fn.flipcarousel = function(options) {
 
         //control elements
         i = 0, //current page index
+        pause = false,
         face = '.front', //flag for which card to append new data to
         deg = 0, //track degree of flip
         disabled = true, //flag to prevent clicks while loading
@@ -68,6 +69,9 @@ $.fn.flipcarousel = function(options) {
 
         $arrowright.click(function(){ if(!disabled) go(i+1) });
         $arrowleft.click(function(){ if(!disabled) go(i-1) });
+        
+        $container.mouseenter(function(){pause=true})
+        $container.mouseleave(function(){pause=false})
 
         $controls.append($arrowleft).append($arrowright);
         $container.append($controls).append($loader);
@@ -192,7 +196,9 @@ $.fn.flipcarousel = function(options) {
     }
 
     function autoplay() {
+
         setInterval(function(){
+            if (!pause)
             if(i<pages.length-1)
                 go(i+1)
             else
